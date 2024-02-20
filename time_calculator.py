@@ -26,6 +26,15 @@ def add_time(start, duration, start_day = "Monday"):
   
   # Number of days later
   days_later = (start_abs_minutes + duration_abs_minutes) // (24*60)
+
+  # AM/PM of the new time
+  am_pm_flag_new_time = (start_abs_minutes + duration_abs_minutes) // (12*60) % 2
+
+  # Defines if the new time is AM or PM
+  if am_pm_flag_new_time == 0:
+    am_pm_new_time = "AM"
+  else:
+    am_pm_new_time = "PM"
   
   # Calculate the new time
   new_minute = (start_minute + duration_minute)%60
@@ -33,10 +42,10 @@ def add_time(start, duration, start_day = "Monday"):
 
   # Format the new time
   if days_later == 0:
-    new_time = f'{new_hour:02d}' + ":" + f'{new_minute:02d}' + " " + am_pm
+    new_time = str(new_hour) + ":" + f'{new_minute:02d}' + " " + am_pm_new_time
   elif days_later == 1:
-    new_time = f'{new_hour:02d}' + ":" + f'{new_minute:02d}' + " " + am_pm + " (next day)"
+    new_time = str(new_hour) + ":" + f'{new_minute:02d}' + " " + am_pm_new_time + " (next day)"
   else:
-    new_time = f'{new_hour:02d}' + ":" + f'{new_minute:02d}' + " " + am_pm + " (" + str(days_later) + " days later)"
+    new_time = str(new_hour) + ":" + f'{new_minute:02d}' + " " + am_pm_new_time + " (" + str(days_later) + " days later)"
   
   return new_time
